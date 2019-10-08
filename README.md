@@ -1,1 +1,91 @@
-git init 
+# N - Queens, a parallel approach
+
+## 1. Case study
+N-queens is a well known problem in computer science. It consists in, having an N number of queens in an NxN Chess board (One queen per column), find a way to position each queen on the board so they can’t attack each other.
+
+![8-Queens Solutions](solutions.png)
+
+* **Input / Domain**: N a number that represents.
+  * The number of Queens (N Queens)
+  * The size of the board (NxN)
+* **Output / Ranks**: The number of possible solutions, and the position of each queen for each solution, probably in the form of a binary matrix.
+
+## 2. Objective of this case study
+
+Generally, the problem is usually approached using serial algorithms with the following complexities:
+
+* Brute force -> O(N ^ N). This means it looks through every position on an NxN board, N times, for N queens
+* A desired implementation using backtracking -> O( 2 ^ N ).
+
+The time taken by a good algorithm is shown in the following table.1.
+
+![table.1](table.png)
+
+As a first step, we will find a serial algorithm capable of solving the problem, then, we will vectorize it. Next, we will parallelize the algorithm using OpenMP to improve the algorithm’s performance on a single, multi-core, node. After that, we will scale the algorithm to work in multi node environments using MPI, and finally, we will contrast it with a CUDA implementation.
+
+After this process, we expect to evidence the evolution of the program according to the following questions.
+
+1. What is the speedup?
+2. What is the efficiency?
+3. Is the algorithm good for Openmp?
+4. Is the algorithm good for MPI?
+
+## 3. Technical requirements
+
+We require a cluster with:
+* A C++ Compiler
+* OpenMP
+* MPI configured 
+* A NFS/shared folder where we can store our code.
+* A CUDA Environment
+
+## 4. Workflow
+1. Design a decent serial algorithm (Big O Notation below or equal to O(2^n)) and implement it in C++
+  * Take the running time of the implementation with various values of N ( N <= 20 so it doesn’t take more than a day to finish)
+2. Vectorize the serial algorithm
+  * Compile with the appropriate flags (intel AVX)
+  * Take the running time of the implementation with various values of N ( N <= 20 so it can be contrasted with the results of the serial approach)
+  * Calculate the speedup
+  * Calculate the efficiency
+3. Design a parallel algorithm using PCAM
+
+4. OpenMP
+  * Take the running time of the implementation with various values of N  ( N <= 20 so it can be contrasted with the results of previous approaches).
+  * Change the number of cores.
+    * Take the running time
+  * Find the optimum number of cores
+  * Calculate the speedup
+  * Calculate the efficiency
+5. MPI
+  * Take the running time of the implementation with various values of N  ( N <= 20 so it can be contrasted with the results of previous approaches)
+  * Change the number of Cores
+    * Check if MPI improves performance.
+  * Calculate the speedup
+  * Calculate the efficiency
+6. CUDA
+  * Check if the problem can be solved on CUDA
+    * If it is, test.
+    * if it is not, analyze why.
+7. Sum up with efficiency and speedup 
+
+## By
+
+* Juan Gonzalo Quiroz 
+    * jquiro12@eafit.edu.co 
+* Valentino Paredes 
+    * jortzip@eafit.edu.co
+* William Cadenas 
+    * wrcadenasm@uninorte.edu.co
+    
+## Repository
+
+* https://github.com/WilliamCadenas21/st0263-p3
+
+## 5. References
+
++ https://www12.cs.fau.de/edu/map/ss13/talks/NQueens_Problem_with_CUDA.pdf
++ https://www.freecodecamp.org/news/lets-backtrack-and-save-some-queens-1f9ef6af5415/
++ https://towardsdatascience.com/computing-number-of-conflicting-pairs-in-a-n-queen-board-in-linear-time-and-space-complexity-e9554c0e0645
++ https://medium.com/@jmohon1986/timeout-the-story-of-n-queens-time-complexity-c80636d92f8b
++ https://www.supercomputingonline.com/latest/academia/14568-new-n-queen-world-record-with-objectweb-proactive
++ https://www.cs.vu.nl/~kielmann/asci-a14/proactive/proactive-exercise.pdf
