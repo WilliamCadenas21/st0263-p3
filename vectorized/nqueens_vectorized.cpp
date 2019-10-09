@@ -53,7 +53,6 @@ int solvenqaux(vector<vector<int>>& board, int col)
 
   /* Consider this column and try placing this queen
      in all rows one by one */
-  //bool res = false;
   for (int i = 0; i < board.size(); i++) {
     if (issafe(board, i, col)) {
       board[i][col] = 1;
