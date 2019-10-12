@@ -1,4 +1,5 @@
 
+#include <omp.h>
 #include <iostream>
 #include <vector>
 
@@ -22,7 +23,7 @@ int solve_nqs(int N){
 
     int solutions_counter_global = 0;
 
-    #pragma opm parellel
+    #pragma omp parallel
     {
         int solutions_counter_local = 0;
         bool is_valid = false;
@@ -71,7 +72,7 @@ int solve_nqs(int N){
             }
         }
 
-        #pragma opm atomic
+        #pragma omp atomic
             solutions_counter_global += solutions_counter_local;
 
     }
