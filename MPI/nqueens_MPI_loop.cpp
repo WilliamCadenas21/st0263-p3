@@ -48,7 +48,7 @@ int main(int argc, char* argv[]){
 
             ranges.push_back(left_limit);
 
-            right_limit = left_limit + slop;
+            right_limit = slop * (i + 1);
 
             if (right_limit >= N) right_limit = N;
 
