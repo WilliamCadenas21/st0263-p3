@@ -25,14 +25,15 @@ int main(int argc, char* argv[]){
     // Vector unit -> [0] Start position [1] end position
     
     vector<uint32_t> ranges_local;
+    // If i'm the master I'll send the ranges to my slaves
+    int N =stoi(argv[1]);
+
 
     if (rank == 0) {
 
         vector<uint32_t> ranges;
 
-        // If i'm the master I'll send the ranges to my slaves
-        int N =stoi(argv[1]);
-
+        
         // The slop is the number of queens divided the number of cores.
         int slop = (int) N/(size  - 1);
 
@@ -50,7 +51,7 @@ int main(int argc, char* argv[]){
 
             if (right_limit >= N) right_limit = N;
 
-            ranges.push_back(right_limit)
+            ranges.push_back(right_limit);
 
             left_limit = right_limit;
             
@@ -77,7 +78,7 @@ int main(int argc, char* argv[]){
             MPI_Recv(&local_sum_up, 1, MPI_INT, i, 1, MPI_COMM_WORLD, &status);
             global_sum_up = global_sum_up + local_sum_up;
         }
-        cout << "Total combinations ->" << solutions_number << endl;
+        cout << "Total combinations ->" << global_sum_up << endl;
     }
     
     MPI_Finalize(); //Terminate MPI Env
