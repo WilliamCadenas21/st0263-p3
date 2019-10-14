@@ -1,5 +1,6 @@
 
 #include <omp.h>
+#include "mpi.h"
 #include <iostream>
 #include <vector>
 
@@ -10,12 +11,23 @@ bool check_position(vector<int>&,int);
 
 int main(int argc, char* argv[]){
 
-    int N =stoi(argv[1]);
-    int solutions_number =  solve_nqs(N);
+    MPI_Init (&argc, &argv); // Initialize MPI Env
+    int rank, size, namelen;
+    char name[MPI_MAX_PROCESSOR_NAME];
+    MPI_Comm_rank (MPI_COMM_WORLD, &rank); // ID of current process
+    MPI_Get_processor_name(name, &namelen); // Hostname of node
+    MPI_Comm_size (MPI_COMM_WORLD, &size); // Number of processes
 
-    cout << "Total combinations ->" << solutions_number << endl;
+    printf("Hello World from rank %d runnung on %s! \n", rank, name);
+    if (rank == 0) printf("MPI Wold size = %d processes \n", size);
 
-    return 0;
+    MPI_Finalize(); //Terminate MPI Env
+    // int N =stoi(argv[1]);
+    // int solutions_number =  solve_nqs(N);
+
+    // cout << "Total combinations ->" << solutions_number << endl;
+
+    //return 0;
 }
 
 
