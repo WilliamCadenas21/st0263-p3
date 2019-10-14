@@ -28,6 +28,7 @@ int main(int argc, char* argv[]){
     // If i'm the master I'll send the ranges to my slaves
     int N =stoi(argv[1]);
 
+    ranges_local.resize(2);
 
     if (rank == 0) {
 
@@ -54,17 +55,24 @@ int main(int argc, char* argv[]){
             ranges.push_back(right_limit);
 
             left_limit = right_limit;
+
+            if (i == 0) {
+                ranges_local[0] = left_limit;
+                ranges_local[1] = right_limit;
+            }else {
+                MPI_Send(&ranges[0], 2, MPI_INT, i, 0 ,MPI_COMM_WORLD);
+            }
             
-            MPI_Send(&ranges[0], 2, MPI_INT, i, 0 ,MPI_COMM_WORLD);
         }
         printf("All data have been seended ");
     }
 
 
-    ranges_local.resize(2);
+    if (rank != 0){
+        MPI_Recv(&ranges_local[0], 2, MPI_INT, 0, 0, MPI_COMM_WORLD, &status);
+    }
 
     // Get params
-    MPI_Recv(&ranges_local[0], 2, MPI_INT, 0, 0, MPI_COMM_WORLD, &status);
 
     printf("Proccess %d has %d - %d", rank,ranges_local[0],ranges_local[1]);
 
