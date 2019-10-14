@@ -1,0 +1,6 @@
+#PBS -l nodes=1
+
+cd $PBS_O_WORKDIR
+
+mpirun -host localhost -np 2 ./NqueensMPI
+
