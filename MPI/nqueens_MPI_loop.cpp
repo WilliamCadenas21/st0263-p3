@@ -46,7 +46,7 @@ int main(int argc, char* argv[]){
 
         for(int i =0; i < size; i++){
             vector<uint32_t> ranges;
-            
+
             ranges.push_back(left_limit);
 
             right_limit = slop * (i + 1);
@@ -58,8 +58,8 @@ int main(int argc, char* argv[]){
             left_limit = right_limit;
 
             if (i == 0) {
-                ranges_local[0] = left_limit;
-                ranges_local[1] = right_limit;
+                ranges_local[0] = ranges[0];
+                ranges_local[1] = ranges[1];
             }else {
                 MPI_Send(&ranges[0], 2, MPI_INT, i, 0 ,MPI_COMM_WORLD);
             }
