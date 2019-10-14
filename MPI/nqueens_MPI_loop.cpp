@@ -35,13 +35,13 @@ int main(int argc, char* argv[]){
 
         
         // The slop is the number of queens divided the number of cores.
-        int slop = (int) N/(size  - 1);
+        int slop = (int) N/size;
 
         // Defined the limits 
         int left_limit = 0;
         int right_limit = 0;
 
-        printf("The slop is %d \n", slop);
+        printf("The slop is %d, N is %d, The size is %d \n", slop, N, size);
 
         for(int i =0; i < size; i++){
 
