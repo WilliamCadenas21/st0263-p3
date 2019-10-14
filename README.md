@@ -9,6 +9,7 @@
 6. [Implementations](#implementations)
 7. [Group members](#members)
 8. [References](#references)
+9. [Honor Code](#honor)
 
 ## 1. Case study <a name="case"></a>
 N-queens is a well known problem in computer science. It consists in, having an N number of queens in an NxN Chess board (One queen per column), find a way to position each queen on the board so they can’t attack each other.
@@ -103,3 +104,12 @@ We require a cluster with:
 + https://medium.com/@jmohon1986/timeout-the-story-of-n-queens-time-complexity-c80636d92f8b
 + https://www.supercomputingonline.com/latest/academia/14568-new-n-queen-world-record-with-objectweb-proactive
 + https://www.cs.vu.nl/~kielmann/asci-a14/proactive/proactive-exercise.pdf
+
+## 9. Honor Code <a name="code"></a>
+
+### Juan Gonzalo Quiroz
+
+### Valentino Malvarmo
+I, Valentino Malvarmo, declare that all the content aported by me is of my own authorship. I contributed in the implementation and design of the serial algorithm, the design of the openMP algorithm, and I was the main responsible for the documentation of the entire project, particularly of the analysis of the results.
+
+### William Cadenas
