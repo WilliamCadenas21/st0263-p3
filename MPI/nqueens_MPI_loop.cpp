@@ -14,35 +14,79 @@ int main(int argc, char* argv[]){
     MPI_Init (&argc, &argv); // Initialize MPI Env
     int rank, size, namelen;
     char name[MPI_MAX_PROCESSOR_NAME];
+    MPI_Status status;
+
     MPI_Comm_rank (MPI_COMM_WORLD, &rank); // ID of current process
     MPI_Get_processor_name(name, &namelen); // Hostname of node
     MPI_Comm_size (MPI_COMM_WORLD, &size); // Number of processes
-
     printf("Hello World from rank %d runnung on %s! \n", rank, name);
     if (rank == 0) printf("MPI Wold size = %d processes \n", size);
 
-    MPI_Finalize(); //Terminate MPI Env
+    // Vector unit -> [0] Start position [1] end position
+    
+    vector<uint32_t> ranges_local;
 
     if (rank == 0) {
+
+        vector<uint32_t> ranges;
+
+        // If i'm the master I'll send the ranges to my slaves
         int N =stoi(argv[1]);
-        int slop = N/size;
+
+        // The slop is the number of queens divided the number of cores.
+        int slop = (int) N/(size  - 1);
+
+        // Defined the limits 
+        int left_limit = 0;
+        int right_limit = 0;
+
         printf("The slop is %d \n", slop);
 
-    }else {
-        // Wait for msg
+        for(int i =0; i < size; i++){
+
+            ranges.push_back(left_limit);
+
+            right_limit = left_limit + slop;
+
+            if (right_limit >= N) right_limit = N;
+
+            ranges.push_back(right_limit)
+
+            left_limit = right_limit;
+            
+            MPI_Send(&ranges[0], 2, MPI_INT, i, 0 ,MPI_COMM_WORLD);
+        }
+    }
+
+
+    ranges_local.resize(2);
+
+    // Get params
+    MPI_Recv(&ranges_local[0], 2, MPI_INT, 0, 0, MPI_COMM_WORLD, &status);
+
+    // Calculated solutions
+    int solutions_number_local =  solve_nqs(N,ranges_local[0],ranges_local[1] );
+    
+    // send solutions tag = 1 -> Solutions tag, to master
+    MPI_Send(&solutions_number_local, 1, MPI_INT, 0, 1 ,MPI_COMM_WORLD);
+
+    if (rank == 0){
+        int global_sum_up = 0;
+        int local_sum_up;
+        for(int i =0; i < size; i++){
+            MPI_Recv(&local_sum_up, 1, MPI_INT, i, 1, MPI_COMM_WORLD, &status);
+            global_sum_up = global_sum_up + local_sum_up;
+        }
+        cout << "Total combinations ->" << solutions_number << endl;
     }
     
-    
+    MPI_Finalize(); //Terminate MPI Env
 
-    // int solutions_number =  solve_nqs(N);
-
-    // cout << "Total combinations ->" << solutions_number << endl;
-
-    //return 0;
+    return 0;
 }
 
 
-int solve_nqs(int N){
+int solve_nqs(int N, int lowerBound, int upperBound){
 
     int solutions_counter_global = 0;
 
@@ -54,7 +98,7 @@ int solve_nqs(int N){
         vector<int> flatted_matrix(N,-1);
 
         #pragma omp for
-        for (int iterator = 0; iterator < N; iterator++ ){
+        for (int iterator = lowerBound; iterator < upperBound; iterator++ ){
             flatted_matrix[0] = iterator; 
             actual_col = 1;
             for(;;){
