@@ -1,4 +1,4 @@
-# N-Queens with MPI + openMP
+m# N-Queens with MPI + openMP
 
 ## Compile
 
@@ -13,7 +13,7 @@ The previous command will generate an executable called 'nqueensMPI'
 
 To run the program simply type a command with the following structure:
 	
-	$ mpirun -np <number of processes> -f hosts_mpi nqueensMPI <number of queens>
+	$ mpirun -np <number of processes> -f hosts_mpi ./nqueensMPI <number of queens>
 
 e.g.
 

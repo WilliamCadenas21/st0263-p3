@@ -1,2 +1,9 @@
-TODO add information 
+# PCAM
 
+## Partitioning
+
+## Communication
+
+## Agglomeration
+
+## Mapping
