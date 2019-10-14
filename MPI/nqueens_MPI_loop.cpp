@@ -26,7 +26,7 @@ int main(int argc, char* argv[]){
     if (rank == 0) {
         int N =stoi(argv[1]);
         int slop = N/size;
-        printf("The slop is %s \n", slop);
+        printf("The slop is %d \n", slop);
 
     }else {
         // Wait for msg
