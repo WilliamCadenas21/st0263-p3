@@ -5,7 +5,7 @@
 #include <vector>
 
 using namespace std;
-int solve_nqs(int);
+int solve_nqs(int,int,int);
 bool check_position(vector<int>&,int);
 
 
