@@ -17,6 +17,6 @@ To run the program simply type a command with the following structure:
 
 e.g.
 
-	$ ./nqueensOMP 8 
+	$ ./nqueens 8 
 
 The previous command will compute the number of solutions for 8-queens.
