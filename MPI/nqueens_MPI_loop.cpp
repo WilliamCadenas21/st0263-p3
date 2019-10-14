@@ -32,7 +32,7 @@ int main(int argc, char* argv[]){
 
     if (rank == 0) {
 
-        vector<uint32_t> ranges;
+        
 
         
         // The slop is the number of queens divided the number of cores.
@@ -45,7 +45,8 @@ int main(int argc, char* argv[]){
         printf("The slop is %d, N is %d, The size is %d \n", slop, N, size);
 
         for(int i =0; i < size; i++){
-
+            vector<uint32_t> ranges;
+            
             ranges.push_back(left_limit);
 
             right_limit = slop * (i + 1);
