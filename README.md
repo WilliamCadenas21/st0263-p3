@@ -1,6 +1,16 @@
 # N - Queens, a parallel approach
 
-## 1. Case study
+# Table of Contents
+1. [Case study](#case)
+2. [Objective](#objective)
+3. [Technical requirements](#requirements)
+4. [Workflow](#workflow)
+5. [PCAM](#pcam)
+6. [Implementations](#implementations)
+7. [Group members](#members)
+8. [References](#references)
+
+## 1. Case study <a name="case"></a>
 N-queens is a well known problem in computer science. It consists in, having an N number of queens in an NxN Chess board (One queen per column), find a way to position each queen on the board so they can’t attack each other.
 
 ![8-Queens Solutions](solutions.png)
@@ -10,7 +20,7 @@ N-queens is a well known problem in computer science. It consists in, having an 
   * The size of the board (NxN)
 * **Output / Ranks**: The number of possible solutions, and the position of each queen for each solution, probably in the form of a binary matrix.
 
-## 2. Objective of this case study
+## 2. Objective <a name="objective"></a>
 
 Generally, the problem is usually approached using serial algorithms with the following complexities:
 
@@ -30,7 +40,7 @@ After this process, we expect to evidence the evolution of the program according
 3. Is the algorithm good for Openmp?
 4. Is the algorithm good for MPI?
 
-## 3. Technical requirements
+## 3. Technical requirements <a name="requirements"></a>
 
 We require a cluster with:
 * A C++ Compiler
@@ -39,7 +49,7 @@ We require a cluster with:
 * A NFS/shared folder where we can store our code.
 * A CUDA Environment
 
-## 4. Workflow
+## 4. Workflow <a name="workflow"></a>
 1. Design a decent serial algorithm (Big O Notation below or equal to O(2^n)) and implement it in C++
   * Take the running time of the implementation with various values of N ( N <= 20 so it doesn’t take more than a day to finish)
 2. Vectorize the serial algorithm
@@ -68,7 +78,15 @@ We require a cluster with:
     * if it is not, analyze why.
 7. Sum up with efficiency and speedup 
 
-## By
+## 5. PCAM <a name="pcam"></a>
+[PCAM](pcam.md)
+
+## 6. Implementations <a name="implementations"></a>
+- [Serial](serial/README.md)
+- [openMP](openMP/README.md)
+- [MPI](MPI/README.md)
+
+## 7. Group members <a name="members"></a>
 
 * Juan Gonzalo Quiroz 
     * jquiro12@eafit.edu.co 
@@ -77,11 +95,7 @@ We require a cluster with:
 * William Cadenas 
     * wrcadenasm@uninorte.edu.co
     
-## Repository
-
-* https://github.com/WilliamCadenas21/st0263-p3
-
-## 5. References
+## 8. References <a name="references"></a>
 
 + https://www12.cs.fau.de/edu/map/ss13/talks/NQueens_Problem_with_CUDA.pdf
 + https://www.freecodecamp.org/news/lets-backtrack-and-save-some-queens-1f9ef6af5415/
