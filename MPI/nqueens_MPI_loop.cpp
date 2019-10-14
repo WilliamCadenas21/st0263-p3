@@ -66,7 +66,7 @@ int main(int argc, char* argv[]){
     // Get params
     MPI_Recv(&ranges_local[0], 2, MPI_INT, 0, 0, MPI_COMM_WORLD, &status);
 
-    printf("Proccess %d has %d - %d", rank,ranges_local[0],ranges_local[1])
+    printf("Proccess %d has %d - %d", rank,ranges_local[0],ranges_local[1]);
 
     // Calculated solutions
     int solutions_number_local =  solve_nqs(N,ranges_local[0],ranges_local[1] );
