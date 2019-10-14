@@ -84,14 +84,17 @@ int main(int argc, char* argv[]){
 
     printf("Procces %d has finished the job \n", rank);
 
-    MPI_Send(&solutions_number_local, 1, MPI_INT, 0, 1 ,MPI_COMM_WORLD);
+    if(rank != 0){
+        MPI_Send(&solutions_number_local, 1, MPI_INT, 0, 1 ,MPI_COMM_WORLD);
+    }
+    
 
     if (rank == 0){
         
-        int global_sum_up = 0;
+        int global_sum_up = solutions_number_local;
         int local_sum_up;
         printf ("Master start receiving results \n");
-        for(int i =0; i < size; i++){
+        for(int i =1; i < size; i++){
             MPI_Recv(&local_sum_up, 1, MPI_INT, i, 1, MPI_COMM_WORLD, &status);
             global_sum_up = global_sum_up + local_sum_up;
             printf ("Master received %d \n", rank);
