@@ -22,7 +22,18 @@ int main(int argc, char* argv[]){
     if (rank == 0) printf("MPI Wold size = %d processes \n", size);
 
     MPI_Finalize(); //Terminate MPI Env
-    // int N =stoi(argv[1]);
+
+    if (rank == 0) {
+        int N =stoi(argv[1]);
+        int slop = N/size;
+        printf("The slop is %s \n", slop);
+
+    }else {
+        // Wait for msg
+    }
+    
+    
+
     // int solutions_number =  solve_nqs(N);
 
     // cout << "Total combinations ->" << solutions_number << endl;
