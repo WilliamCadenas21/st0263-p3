@@ -1,21 +1,41 @@
-
 #include <omp.h>
 #include <iostream>
 #include <vector>
+#include <stdexcept>
+#include <cstdlib>
 
 using namespace std;
-int solve_nqs(int);
-bool check_position(vector<int>&,int);
 
+int solve_nqs(int);
+bool check_position(vector<int>&, int);
 
 int main(int argc, char* argv[]){
+    
+    if (argc < 2) {
+        cout << "Usage: nqueens <# of queens> [# of threads]" << endl;
+        return 1;
+    }
 
-    int N =stoi(argv[1]);
-    int solutions_number =  solve_nqs(N);
+    try {
+        const char* thenv = "OMP_NUM_THREADS";
+        int N =stoi(argv[1]);
+        int nthreads = getenv(thenv) ? stoi(getenv(thenv)) : 1;
+        nthreads = argc > 2 ? stoi(argv[2]) : nthreads;
 
-    cout << "Total combinations ->" << solutions_number << endl;
+        omp_set_num_threads(nthreads);
 
-    return 0;
+        cout << "Executing with " << nthreads << " threads." << endl;
+        int solutions_number =  solve_nqs(N);
+        cout << "Number of solutions: " << solutions_number << endl;
+
+        return 0;
+    } catch (const exception& e) {
+        cout << "Usage: nqueens <# of queens> [# of threads] " << endl
+             << "     | # of queens must be a number" << endl
+             << "     | # of threads must be a number" << endl;
+
+        return 2;
+    }
 }
 
 
