@@ -31,7 +31,7 @@ int main(int argc, char* argv[]){
 
     low = rank * distance;
     if (rank != last)
-        high = low + distance
+        high = low + distance;
     else
         high = low + distance + (N % world_size);
 
