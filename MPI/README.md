@@ -1,4 +1,4 @@
-m# N-Queens with MPI + openMP
+# N-Queens with MPI + openMP
 
 ## Compile
 
