@@ -10,79 +10,40 @@ bool check_position(vector<int>&,int);
 
 
 int main(int argc, char* argv[]){
+    int rank, world_size, solutions, N;
+    int distance, low, high, last;
+    int mysol = 0;
+
+    N =stoi(argv[1]);
 
     MPI_Init (&argc, &argv); // Initialize MPI Env
-    int rank, size, namelen;
-    char name[MPI_MAX_PROCESSOR_NAME];
-    MPI_Status status;
-
     MPI_Comm_rank (MPI_COMM_WORLD, &rank); // ID of current process
-    MPI_Get_processor_name(name, &namelen); // Hostname of node
-    MPI_Comm_size (MPI_COMM_WORLD, &size); // Number of processes
-    printf("Hello World from rank %d runnung on %s! \n", rank, name);
-    if (rank == 0) printf("MPI Wold size = %d processes \n", size);
+    MPI_Comm_size (MPI_COMM_WORLD, &world_size); // Number of processes
 
-    // Vector unit -> [0] Start position [1] end position
-    
-    vector<uint32_t> ranges_local;
-    // If i'm the master I'll send the ranges to my slaves
-    int N =stoi(argv[1]);
-
-
-    if (rank == 0) {
-
-        vector<uint32_t> ranges;
-
-        
-        // The slop is the number of queens divided the number of cores.
-        int slop = (int) N/size;
-
-        // Defined the limits 
-        int left_limit = 0;
-        int right_limit = 0;
-
-        printf("The slop is %d, N is %d, The size is %d \n", slop, N, size);
-
-        for(int i =0; i < size; i++){
-
-            ranges.push_back(left_limit);
-
-            right_limit = left_limit + slop;
-
-            if (right_limit >= N) right_limit = N;
-
-            ranges.push_back(right_limit);
-
-            left_limit = right_limit;
-            
-            MPI_Send(&ranges[0], 2, MPI_INT, i, 0 ,MPI_COMM_WORLD);
-        }
+    if (world_size < 2) {
+        cout << "Need at least two computing nodes" << endl;
+        MPI_Finalize();
+        return 1;
     }
 
+    distance = N / world_size;
+    last = world_size - 1;
 
-    ranges_local.resize(2);
+    low = rank * distance;
+    if (rank != last)
+        high = low + distance
+    else
+        high = low + distance + (N % world_size);
 
-    // Get params
-    MPI_Recv(&ranges_local[0], 2, MPI_INT, 0, 0, MPI_COMM_WORLD, &status);
+    mysol = solve_nqs(N, low, high);
+    MPI_Reduce(&mysol, &solutions, 1, MPI_INT, MPI_SUM, 0, MPI_COMM_WORLD);
 
-    // Calculated solutions
-    int solutions_number_local =  solve_nqs(N,ranges_local[0],ranges_local[1] );
-    
-    // send solutions tag = 1 -> Solutions tag, to master
-    MPI_Send(&solutions_number_local, 1, MPI_INT, 0, 1 ,MPI_COMM_WORLD);
-
-    if (rank == 0){
-        int global_sum_up = 0;
-        int local_sum_up;
-        for(int i =0; i < size; i++){
-            MPI_Recv(&local_sum_up, 1, MPI_INT, i, 1, MPI_COMM_WORLD, &status);
-            global_sum_up = global_sum_up + local_sum_up;
-        }
-        cout << "Total combinations ->" << global_sum_up << endl;
-    }
+    // Master
+    if (rank == 0)
+        cout << "Number of solutions: " << solutions << endl;
     
     MPI_Finalize(); //Terminate MPI Env
-
+     
     return 0;
 }
 
