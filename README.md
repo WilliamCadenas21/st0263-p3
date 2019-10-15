@@ -108,6 +108,7 @@ We require a cluster with:
 ## 9. Honor Code <a name="code"></a>
 
 ### Juan Gonzalo Quiroz
+I, Juan Gonzalo Quiroz Cadavid declare that all the conten aported by me is of my own authorship. I desing the serial code and codifited it using loops and avoing recursived calls, also I design and implement openMP onto the project,Finally; I worked on the MPI Project in parallel with Valentino Malvarmo. We both design a differente approach to the same problem and due to simplicity we choose the Malvarmo implementation to our analysis.
 
 ### Valentino Malvarmo
 I, Valentino Malvarmo, declare that all the content aported by me is of my own authorship. I contributed in the implementation and design of the serial algorithm, the design of the openMP algorithm, and I was the main responsible for the documentation of the entire project, particularly of the analysis of the results.
