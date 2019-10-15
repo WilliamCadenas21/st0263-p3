@@ -27,7 +27,7 @@ int main(int argc, char* argv[]){
     if (rank != last)
         high = low + distance;
     else
-        high = low + distance + (N % world_size);
+        high = N;
 
     mysol = solve_nqs(N, low, high);
     MPI_Reduce(&mysol, &solutions, 1, MPI_INT, MPI_SUM, 0, MPI_COMM_WORLD);
