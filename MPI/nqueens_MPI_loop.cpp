@@ -58,8 +58,8 @@ int main(int argc, char* argv[]){
             left_limit = right_limit;
 
             if (i == 0) {
-                ranges_local[0] = ranges[0];
-                ranges_local[1] = ranges[1];
+                ranges_local[0] = ranges[1];
+                ranges_local[1] = ranges[0];
             }else {
                 MPI_Send(&ranges[0], 2, MPI_INT, i, 0 ,MPI_COMM_WORLD);
             }
