@@ -80,7 +80,7 @@ We require a cluster with:
 7. Sum up with efficiency and speedup 
 
 ## 5. PCAM <a name="pcam"></a>
-[PCAM](./pcam.md)
+[PCAM](./PCAM.md)
 
 ## 6. Implementations <a name="implementations"></a>
 - [Serial](serial/README.md)
@@ -111,7 +111,7 @@ We require a cluster with:
 I, Juan Gonzalo Quiroz Cadavid declare that all the conten aported by me is of my own authorship. I desing the serial code and codifited it using loops and avoing recursived calls, also I design and implement openMP onto the project,Finally; I worked on the MPI Project in parallel with Valentino Malvarmo. We both design a differente approach to the same problem and due to simplicity we choose the Malvarmo implementation to our analysis.
 
 ### Valentino Malvarmo
-I, Valentino Malvarmo, declare that all the content aported by me is of my own authorship. I contributed in the implementation and design of the serial algorithm, the design of the openMP algorithm, and I was the main responsible for the documentation of the entire project, particularly of the analysis of the results.
+I, Valentino Malvarmo, declare that all the content aported by me is of my own authorship. I contributed in the implementation and design of the serial algorithm, the design of the openMP algorithm, design and implementation of one of the MPI proposed MPI algorithms, and I was the main responsible for the documentation of the entire project, particularly of the analysis of the results.
 
 ### William Cadenas
 I, William Cadenas, declare that all the content aported by me is of my own authorship. I contribuited in the implementation and the desing of the parallel algorithm with Openmp and also the first desing and approach for Mpi based on PCAM metodologic.  
