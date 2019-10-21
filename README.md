@@ -9,7 +9,7 @@
 6. [Implementations](#implementations)
 7. [Group members](#members)
 8. [References](#references)
-9. [Honor Code](#honor)
+9. [Honor Code](#code)
 
 ## 1. Case study <a name="case"></a>
 N-queens is a well known problem in computer science. It consists in, having an N number of queens in an NxN Chess board (One queen per column), find a way to position each queen on the board so they can’t attack each other.
