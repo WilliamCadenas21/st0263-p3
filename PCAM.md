@@ -78,4 +78,4 @@ Due to the backtracking nature of our problem, the only oportunity we found to p
 
 ## Mapping
 
-The mapping to processors and machines is done automatically by openMP and MPI. We will be using three machines each with 24 cores.
+The mapping to processors and machines is done automatically by openMP and MPI. We will be using three machines with 24 cores each.
