@@ -93,6 +93,7 @@ We require a cluster with:
     * jquiro12@eafit.edu.co 
 * Valentino Paredes 
     * jortzip@eafit.edu.co
+    * [Video](https://youtu.be/DlrqZ97k7Zc)
 * William Cadenas 
     * wrcadenasm@uninorte.edu.co
     
