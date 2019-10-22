@@ -96,6 +96,8 @@ We require a cluster with:
     * [Video](https://youtu.be/DlrqZ97k7Zc)
 * William Cadenas 
     * wrcadenasm@uninorte.edu.co
+    * [Video](https://youtu.be/vq3W-2p__Pw)
+    
     
 ## 8. References <a name="references"></a>
 
