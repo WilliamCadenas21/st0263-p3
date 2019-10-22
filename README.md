@@ -115,4 +115,4 @@ I, Juan Gonzalo Quiroz Cadavid declare that all the conten aported by me is of m
 I, Valentino Malvarmo, declare that all the content aported by me is of my own authorship. I contributed in the implementation and design of the serial algorithm, the design of the openMP algorithm, design and implementation of one of the MPI proposed MPI algorithms, and I was the main responsible for the documentation of the entire project, particularly of the analysis of the results.
 
 ### William Cadenas
-I, William Cadenas, declare that all the content aported by me is of my own authorship. I contribuited in the implementation and the desing of the parallel algorithm with Openmp and also the first desing and approach for Mpi based on PCAM metodologic.  
+I, William Cadenas, declare that all the content aported by me is of my own authorship. I contribuited in the implementation and the desing of the parallel algorithm with Openmp and also the first desing and approach for Mpi based on PCAM metodologic. Also, I explain the PCAM implemented on the problem.
